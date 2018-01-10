@@ -1,13 +1,13 @@
 {
   "name": "theme-loader",
   "version": "0.1.0",
-  "description": "******",
+  "description": "Dynamically create different theme style with data",
   "main": "lib/index.js",
   "engines": {
     "node": ">=6"
   },
   "scripts": {
-    "build": "babel src/ -d lib/ & babel temp/ -d temp/",
+    "build": "git push origin master & babel src/ -d lib/ & babel temp/ -d temp/",
     "prepublish": "npm run build"
   },
   "files": [
@@ -15,9 +15,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "*******"
+    "url": "git+https://github.com/xiaoshuangLi/theme-loader.git"
   },
-  "license": "******",
+  "author": "Xiaoshuang Li",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xiaoshuangLi/theme-loader/issues"
+  },
   "dependencies": {
     "babel-generator": "^6.26.0",
     "babel-template": "^6.26.0",
@@ -30,16 +34,19 @@
     "webpack": ">= 3"
   },
   "devDependencies": {
+    "babel": "^6.5.2",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.26.0",
-    "babel-eslint": "^8.0.1",
+    "babel-eslint": "^8.0.2",
     "babel-loader": "^7.1.2",
-    "babel-plugin-dynamic-import-node": "^1.1.0",
-    "babel-plugin-syntax-decorators": "^6.13.0",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-stage-0": "^6.24.1",
     "eslint": "^4.10.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.1",
