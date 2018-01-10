@@ -1,0 +1,50 @@
+{
+  "name": "theme-loader",
+  "version": "0.1.0",
+  "description": "******",
+  "main": "lib/index.js",
+  "engines": {
+    "node": ">=6"
+  },
+  "scripts": {
+    "build": "babel src/ -d lib/ & babel temp/ -d temp/",
+    "prepublish": "npm run build"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "*******"
+  },
+  "license": "******",
+  "dependencies": {
+    "babel-generator": "^6.26.0",
+    "babel-template": "^6.26.0",
+    "babel-traverse": "^6.26.0",
+    "babel-types": "^6.26.0",
+    "babylon": "^6.18.0",
+    "loader-utils": "^1.1.0"
+  },
+  "peerDependencies": {
+    "webpack": ">= 3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.1",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-dynamic-import-node": "^1.1.0",
+    "babel-plugin-syntax-decorators": "^6.13.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "eslint": "^4.10.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "webpack": "^3.8.1"
+  }
+}
