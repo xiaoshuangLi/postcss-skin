@@ -10,7 +10,7 @@ const temp = require(tempPath);
 
 const defaultOptions = {
   type: 'after-sass',
-  prefix: '_theme_',
+  prefix: '_skin_',
 };
 
 function saveTemp(temps = [], resourcePath = '', options = {}) {
@@ -57,7 +57,7 @@ function loader(source) {
   const { type = '', prefix = '' } = options;
 
   if (!type) {
-    return console.error(`Type is required for theme-loader, please chose in ${Object.keys(funcs).join(',')}`);
+    return console.error(`Type is required for skin-loader, please chose in ${Object.keys(funcs).join(',')}`);
   }
 
   if (!prefix) {

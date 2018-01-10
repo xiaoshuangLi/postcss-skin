@@ -1,2 +1,2 @@
-# theme-loader
-Dynamically create different theme style with data
+# skin-loader
+Dynamically create different skin/theme style with data

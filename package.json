@@ -1,7 +1,7 @@
 {
-  "name": "theme-loader",
+  "name": "skin-loader",
   "version": "0.1.0",
-  "description": "Dynamically create different theme style with data",
+  "description": "Dynamically create different skin/theme style with data",
   "main": "lib/index.js",
   "engines": {
     "node": ">=6"
@@ -15,12 +15,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xiaoshuangLi/theme-loader.git"
+    "url": "git+https://github.com/xiaoshuangLi/skin-loader.git"
   },
   "author": "Xiaoshuang Li",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/xiaoshuangLi/theme-loader/issues"
+    "url": "https://github.com/xiaoshuangLi/skin-loader/issues"
   },
   "dependencies": {
     "babel-generator": "^6.26.0",
@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "babel": "^6.5.2",
-    "babel-cli": "^6.24.1",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.2",
     "babel-loader": "^7.1.2",
