@@ -7,7 +7,7 @@
     "node": ">=6"
   },
   "scripts": {
-    "build": "git push origin master & babel src/ -d lib/ & babel temp/ -d temp/",
+    "build": "git push origin master & babel src/ -d lib/",
     "prepublish": "npm run build"
   },
   "files": [
