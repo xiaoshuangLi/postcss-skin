@@ -48,8 +48,6 @@ const funcs = {
 
     return res;
   },
-  ['wrapper-sass']() {
-  },
 };
 
 function loader(source) {
