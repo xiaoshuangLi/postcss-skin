@@ -1,6 +1,6 @@
 {
   "name": "skin-loader",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Dynamically create different skin/theme style with data",
   "main": "lib/index.js",
   "engines": {

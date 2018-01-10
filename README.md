@@ -1,5 +1,7 @@
 # skin-loader
-Dynamically create different skin/theme style with data;
+Dynamically create different skin/theme style with data.
+
+[Kind of Demo](https://codepen.io/xiaoshaung/pen/dJmvPp?editors=0010)
 
 ## Installation
 
@@ -12,7 +14,7 @@ npm install --save-dev skin-loader
 ### type
 
 * Type: Oneof `['before-sass', 'after-sass']`
-* Default: `before-sass`
+* Default: `'before-sass'`
 * Required: `true`
 
 before-sass: Add `@mixin skin` to the Scss files.
@@ -21,7 +23,7 @@ after-sass: Filter skin css code after Sass-loader, and save in `skin-loader/lib
 ### prefix
 
 * Type: `String`
-* Default: `_skin_`
+* Default: `'_skin_'`
 * Required: `false`
 
 For avoid the conflict of name.
