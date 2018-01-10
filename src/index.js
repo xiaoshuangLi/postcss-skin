@@ -16,7 +16,7 @@ const defaultOptions = {
 function saveTemp(temps = [], resourcePath = '', options = {}) {
   const { prefix = '' } = options;
 
-  if (temps.length) {
+  if (temps.length || temp[resourcePath]) {
     temp[resourcePath] = temps.join('');
   }
 
