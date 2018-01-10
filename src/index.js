@@ -9,14 +9,16 @@ const tempPath = path.resolve(__dirname, './temp/temp.js');
 const temp = require(tempPath);
 
 const defaultOptions = {
-  type: 'after-sass',
+  type: 'before-sass',
   prefix: '_skin_',
 };
 
 function saveTemp(temps = [], resourcePath = '', options = {}) {
   const { prefix = '' } = options;
 
-  temp[resourcePath] = temps.join('');
+  if (temps.length) {
+    temp[resourcePath] = temps.join('');
+  }
 
   let res = generateModuleCode(temp);
   res += generateModuleCode(prefix, 'prefix');
@@ -42,9 +44,7 @@ const funcs = {
     const temps = source.match(reg) || [];
     saveTemp(temps, resourcePath, options);
 
-    source = source.replace(reg);
-
-    const res = generateModuleCode(source);
+    const res = source.replace(reg, '');
 
     return res;
   },
@@ -59,7 +59,7 @@ function loader(source) {
   }
 
   if (!prefix) {
-    console.warn('Prefix is necessary to avoid conflict of name');
+    console.warn('Prefix is necessary to avoid the conflict of name');
   }
 
   const func = funcs[type];

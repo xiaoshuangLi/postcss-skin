@@ -1,5 +1,5 @@
 export default (prefix = '') => `
-$prefix: '${prefix}';
+$skinPrefix: '${prefix}';
 
 @function skinGetStr($str) {
   $str: unquote($str);
@@ -8,7 +8,7 @@ $prefix: '${prefix}';
 }
 
 @mixin skin($name, $args...) {
-  @at-root #{$prefix} #{$name} {
+  @at-root #{$skinPrefix} #{$name} {
     @for $a from 1 through length($args) {
       $arg: nth($args, $a);
       $type: type-of($arg);
@@ -17,7 +17,7 @@ $prefix: '${prefix}';
         @for $r from 1 through length($arg) {
           $key: nth($arg, $r);
 
-          #{$key}: skinGetStr($prefix + $key);
+          #{$key}: skinGetStr($skinPrefix + $key);
         }
       } @else if $type == map {
         @each $key, $value in $arg {

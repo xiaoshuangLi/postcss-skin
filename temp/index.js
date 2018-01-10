@@ -5,7 +5,7 @@ const { prefix, ...others } = temp;
 let style;
 
 export default function(obj = {}) {
-  if (window === undefined || document === undefined) {
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
     return null;
   }
 
