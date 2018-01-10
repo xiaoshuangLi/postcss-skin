@@ -1,13 +1,13 @@
 {
   "name": "skin-loader",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "description": "Dynamically create different skin/theme style with data",
   "main": "lib/index.js",
   "engines": {
     "node": ">=6"
   },
   "scripts": {
-    "build": "git push origin master & babel src/ -d lib/",
+    "build": "babel src/ -d lib/ && babel temp/ -d lib/temp/",
     "prepublish": "npm run build"
   },
   "files": [

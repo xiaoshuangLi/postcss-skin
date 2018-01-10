@@ -1,39 +1,25 @@
-'use strict';
+import temp from './temp';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+const { prefix, ...others } = temp;
 
-var _keys = require('babel-runtime/core-js/object/keys');
+let style;
 
-var _keys2 = _interopRequireDefault(_keys);
-
-var _values = require('babel-runtime/core-js/object/values');
-
-var _values2 = _interopRequireDefault(_values);
-
-var _objectWithoutProperties2 = require('babel-runtime/helpers/objectWithoutProperties');
-
-var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
-
-exports.default = function () {
-  var obj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
+export default function(obj = {}) {
   if (window === undefined || document === undefined) {
     return null;
   }
 
   if (!style) {
     style = document.createElement('style');
-    style.setAttribute('type', 'text/css');
+    style.setAttribute('type', 'text/css')
     document.head.appendChild(style);
   }
 
-  var res = (0, _values2.default)(others).join('');
+  let res = Object.values(others).join('');
 
-  (0, _keys2.default)(obj).forEach(function (key) {
-    var value = obj[key] || '';
-    var reg = new RegExp('' + prefix + key, 'g');
+  Object.keys(obj).forEach((key) => {
+    const value = obj[key] || '';
+    const reg = new RegExp(`${prefix}${key}`, 'g');
 
     res = res.replace(reg, value);
   });
@@ -42,18 +28,3 @@ exports.default = function () {
 
   style.innerHTML = res;
 };
-
-var _temp = require('./temp');
-
-var _temp2 = _interopRequireDefault(_temp);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-
-var prefix = _temp2.default.prefix,
-    others = (0, _objectWithoutProperties3.default)(_temp2.default, ['prefix']);
-
-var style = void 0;
-
-;
