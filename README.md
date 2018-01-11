@@ -61,10 +61,10 @@ export default App;
     box-shadow: '0 0 5px _skin_background',
   ));
 
-  @include skin(&, {
+  @include skin(&) {
     color: _skin_color;
     background: _skin_background;
-  });
+  };
 }
 ```
 
