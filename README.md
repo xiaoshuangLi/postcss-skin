@@ -56,6 +56,7 @@ export default App;
 .cus-skin-part {
   padding: 100px;
   font-size: 14px;
+  animation: 1s ani infinite;
 
   @include skin(&, (
     box-shadow: '0 0 5px _skin_background',
@@ -65,6 +66,15 @@ export default App;
     color: _skin_color;
     background: _skin_background;
   };
+}
+
+@keyframes ani {
+  0% {
+    background: _skin_color;
+  }
+  100% {
+    background: _skin_background;
+  }
 }
 ```
 

@@ -24,7 +24,9 @@ export function clearObject(obj = {}) {
   return res;
 };
 
-export const containerRegs = [
+const keyframesReg = /\@+((\s|\S)*)keyframes(\s|\S)*}(?=(\s|\n|}))/g;
+
+const containerRegs = [
   /\@(media|supports)(\s|\S)*}(?=(\s|\n|}))/g,
 ];
 
@@ -45,6 +47,7 @@ export function getTempsAndCss(source, options = {}) {
   source += ' ';
 
   const prefixReg = new RegExp(`${prefix}\\s(\\s|\\S)*?}`, 'g');
+  const prefixWordReg = new RegExp(prefix, 'g');
 
   const containerTemps = containerRegs
     .reduce((temps, reg) => temps.concat(source.match(reg)), [])
@@ -52,12 +55,19 @@ export function getTempsAndCss(source, options = {}) {
 
   source = clearSource(source, containerTemps);
 
+  let keyframesTemps = source.match(keyframesReg) || [];
+  keyframesTemps = keyframesTemps.filter(
+    temp => prefixWordReg.test(temp)
+  );
+
+  source = clearSource(source, keyframesTemps);
+
   const prefixTemps = source.match(prefixReg);
 
   source = clearSource(source, prefixReg);
 
   return {
-    temps: containerTemps.concat(prefixTemps),
+    temps: [].concat(containerTemps, keyframesTemps, prefixTemps),
     css: source,
   };
 };
