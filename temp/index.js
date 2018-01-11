@@ -2,17 +2,15 @@ import temp from './temp';
 
 const { prefix, ...others } = temp;
 
-let style;
-
 export default function(obj = {}) {
   if (typeof window === 'undefined' || typeof document === 'undefined') {
     return null;
   }
 
-  if (!style) {
-    style = document.createElement('style');
-    style.setAttribute('type', 'text/css')
-    document.head.appendChild(style);
+  if (!window._skinEle) {
+    window._skinEle = document.createElement('style');
+    window._skinEle.setAttribute('type', 'text/css')
+    document.head.appendChild(window._skinEle);
   }
 
   let res = Object.values(others).join('');
@@ -24,7 +22,7 @@ export default function(obj = {}) {
     res = res.replace(reg, value);
   });
 
-  res = res.replace(prefix, '');
+  res = res.replace(new RegExp(prefix, 'g'), '');
 
-  style.innerHTML = res;
+  window._skinEle.innerHTML = res;
 };

@@ -59,9 +59,6 @@ export default App;
   font-size: 14px;
 
   @include skin(&, (
-    'color',
-    'background',
-  ), (
     box-shadow: '0 0 5px _skin_background',
   ));
 }

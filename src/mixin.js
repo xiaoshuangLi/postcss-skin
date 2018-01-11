@@ -9,6 +9,8 @@ $skinPrefix: '${prefix}';
 
 @mixin skin($name, $args...) {
   @at-root #{$skinPrefix} #{$name} {
+    @content;
+
     @for $a from 1 through length($args) {
       $arg: nth($args, $a);
       $type: type-of($arg);

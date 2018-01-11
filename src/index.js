@@ -3,10 +3,10 @@ import path from 'path';
 import fs from 'fs';
 
 import mixin from './mixin';
-import { generateModuleCode } from './utils';
+import { generateModuleCode, clearObject, getTempsAndCss } from './utils';
 
 const tempPath = path.resolve(__dirname, './temp/temp.js');
-const temp = require(tempPath);
+let temp = require(tempPath);
 
 const defaultOptions = {
   type: 'before-sass',
@@ -16,9 +16,8 @@ const defaultOptions = {
 function saveTemp(temps = [], resourcePath = '', options = {}) {
   const { prefix = '' } = options;
 
-  if (temps.length || temp[resourcePath]) {
-    temp[resourcePath] = temps.join('');
-  }
+  temp[resourcePath] = temps.join('');
+  temp = clearObject(temp);
 
   let res = generateModuleCode(temp);
   res += generateModuleCode(prefix, 'prefix');
@@ -37,16 +36,13 @@ const funcs = {
   },
   ['after-sass'](source, options = {}) {
     const { resourcePath } = this;
-    const { prefix = '' } = options;
 
-    const reg = new RegExp(`${prefix}\\s(\\s|\\S)*?}`, 'g');
+    const obj = getTempsAndCss(source, options);
+    const { css, temps = [] } = obj;
 
-    const temps = source.match(reg) || [];
     saveTemp(temps, resourcePath, options);
 
-    const res = source.replace(reg, '');
-
-    return res;
+    return css;
   },
 };
 
