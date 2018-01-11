@@ -1,8 +1,7 @@
 # skin-loader (Base on Sass !!!)
 Dynamically create different skin/theme style with data.
 
-[Kind o
-f Demo](https://codepen.io/xiaoshaung/pen/dJmvPp?editors=0010)
+[Kind of Demo](https://codepen.io/xiaoshaung/pen/dJmvPp?editors=0010)
 
 ## Installation
 
@@ -61,6 +60,11 @@ export default App;
   @include skin(&, (
     box-shadow: '0 0 5px _skin_background',
   ));
+
+  @include skin(&, {
+    color: _skin_color;
+    background: _skin_background;
+  });
 }
 ```
 
