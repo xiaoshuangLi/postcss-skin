@@ -1,4 +1,4 @@
-# skin-loader
+# skin-loader (Base on Sass !!!)
 Dynamically create different skin/theme style with data.
 
 [Kind o
