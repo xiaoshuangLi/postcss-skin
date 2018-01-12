@@ -17,11 +17,18 @@ export default function(obj = {}) {
 
   const cssCharReg = /\s|:|;|,/g;
 
+  // for support ( '_skin_attr' || _skin_attr ) => _skin_attr
   const quotationReg = /"|'/g;
-  const splitReg = /\[|\]|\./g;
+  // for split attr string '_skin_obj._skin_attr' => ['_skin_obj', '_skin_attr'];
+  const splitReg = /\[|\]|\./g; 
+
+  // for create attr reg '[0]' => /\[0\]/
   const splitMatchReg = /(\[|\]|\.)/g;
 
+  // for get `${prefix}${....}` (like: '_skin_color')
   const keywordReg = new RegExp(`('|"|\\s|:|,)${prefix}\\S(\\s|\\S)*?('|"|\\s|;|,)`, 'g');
+
+  // for clear prefix in code
   const prefixReg = new RegExp(prefix, 'g');
 
   const store = res
