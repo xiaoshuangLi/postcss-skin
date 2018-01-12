@@ -41,6 +41,10 @@ import temp from 'skin-loader/lib/temp';
 temp({
   color: 'red',
   background: 'green',
+  array: ['blue', 'purple'],
+  obj: {
+    attr: 'yellow',
+  },
 });
 
 class App extends Component {
@@ -60,17 +64,28 @@ export default App;
 
   @include skin(&, (
     box-shadow: '0 0 5px _skin_background',
+    text-shadow: '0 0 5px _skin_array[0]',
   ));
 
   @include skin(&) {
     color: _skin_color;
     background: _skin_background;
+    border-color: 0 0 5px '_skin_array[1]';
   };
 }
 
 @keyframes ani {
   0% {
     background: _skin_color;
+  }
+  20% {
+    background: '_skin_array[0]';
+  }
+  40% {
+    background: '_skin_array[1]';
+  }
+  60% {
+    background: '_skin_obj._skin_attr';
   }
   100% {
     background: _skin_background;
