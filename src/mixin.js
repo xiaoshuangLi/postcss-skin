@@ -11,20 +11,24 @@ $skinPrefix: '${prefix}';
   @at-root #{$skinPrefix} #{$name} {
     @content;
 
-    @for $a from 1 through length($args) {
-      $arg: nth($args, $a);
-      $type: type-of($arg);
+    $length: length($args);
 
-      @if $type == list {
-        @for $r from 1 through length($arg) {
-          $key: nth($arg, $r);
+    @if $length > 0 {
+      @for $a from 1 through $length {
+        $arg: nth($args, $a);
+        $type: type-of($arg);
 
-          #{$key}: skinGetStr($skinPrefix + $key);
-        }
-      } @else if $type == map {
-        @each $key, $value in $arg {
-          @if type-of($value) == 'string' {
-            #{$key}: skinGetStr($value);
+        @if $type == list {
+          @for $r from 1 through length($arg) {
+            $key: nth($arg, $r);
+
+            #{$key}: skinGetStr($skinPrefix + $key);
+          }
+        } @else if $type == map {
+          @each $key, $value in $arg {
+            @if type-of($value) == 'string' {
+              #{$key}: skinGetStr($value);
+            }
           }
         }
       }
