@@ -1,7 +1,7 @@
 # skin-loader (Base on Sass !!!)
 Dynamically create different skin/theme style with data.
 
-[Kind of Demo](https://codepen.io/xiaoshaung/pen/dJmvPp?editors=0010)
+[Kind of Demo](https://codepen.io/xiaoshuang/pen/dJmvPp)
 
 ## Installation
 
