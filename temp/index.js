@@ -2,7 +2,27 @@ import temp from './temp';
 
 const { prefix, ...others } = temp;
 
-export default function(obj = {}) {
+export function createTemp(temp = others) {
+  const type = typeof temp;
+
+  switch (type) {
+    case 'string': {
+      temp = [temp];
+      break;
+    }
+
+    case 'object': {
+      temp = Array.isArray(temp) ? temp : Object.values(temp);
+      break;
+    }
+  }
+
+  temp = temp.join('\u0020');
+
+  return temp;
+}
+
+export default function(obj = {}, temp = others) {
   if (typeof window === 'undefined' || typeof document === 'undefined') {
     return null;
   }
@@ -13,7 +33,7 @@ export default function(obj = {}) {
     document.head.appendChild(window._skinEle);
   }
 
-  let res = Object.values(others).join('\u0020');
+  let res = createTemp(temp);
 
   const cssCharReg = /\s|:|;|,/g;
 
