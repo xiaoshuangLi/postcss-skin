@@ -40,7 +40,7 @@ const cleanRoot = (root) => {
 
 const skinPlugin = (opts = {}) => {
   let { prefix = '$' } = opts;
-  prefix = prefix.replace(/\W/g, value => `\\${value}`);
+  prefix = prefix.replace(/(?=(\W))/g, '\\');
 
   if (!prefix) {
     console.warn('Prefix is necessary for postcss-skin');
@@ -74,4 +74,4 @@ const skinPlugin = (opts = {}) => {
 
 const plugin = postcss.plugin('postcss-skin', skinPlugin);
 
-export default plugin;
+module.exports = plugin;

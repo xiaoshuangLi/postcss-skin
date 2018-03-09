@@ -3,21 +3,29 @@ Dynamically create different skin/theme style with data.
 
 [Kind of Demo](https://codepen.io/xiaoshuang/pen/dJmvPp)
 
+## For Sass
+[skin-loader](https://github.com/xiaoshuangLi/skin-loader), base on Sass, Webpack
+
 ## Installation
 
 ```sh
 npm install --save-dev postcss-skin
 ```
 
-## Loader Options
+## Plugin Options
 
 ### prefix
+For avoid the conflict of name.
 
 * Type: `String`
 * Default: `'$'`
 * Required: `false`
 
-For avoid the conflict of name.
+```js
+require('postcss-skin')({
+  prefix: '$',
+})
+```
 
 ## How To Use
 

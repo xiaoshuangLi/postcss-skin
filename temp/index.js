@@ -43,10 +43,10 @@ export default function(obj = {}, temp = others) {
   const splitReg = /\[|\]|\./g; 
 
   // for create attr reg '[0]' => /\[0\]/
-  const splitMatchReg = /\W/g;
+  const splitMatchReg = /(?=(\W))/g;
 
   // for get `${prefix}${....}` (like: '$color')
-  const keywordReg = new RegExp(`('|")[^'"]*${prefix}[^'"]*(?=("|'))("|')`, 'g');
+  const keywordReg = new RegExp(`("(\s|\S)*${prefix}.*?"|'(\s|\S)*${prefix}.*?')`, 'g');
 
   // for clear prefix in code
   const prefixReg = new RegExp(prefix, 'g');
@@ -87,8 +87,10 @@ export default function(obj = {}, temp = others) {
     }, obj);
 
     const originsStr =  origins
-      .join('|')
-      .replace(splitMatchReg, '\\$1');
+      .map(
+        item => item.replace(splitMatchReg, '\\')
+      )
+      .join('|');
 
     const originsReg = new RegExp(originsStr, 'g');
 
