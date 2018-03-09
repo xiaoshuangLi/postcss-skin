@@ -1,4 +1,4 @@
-# postcss-skin (Base on Sass !!!)
+# postcss-skin
 Dynamically create different skin/theme style with data.
 
 [Kind of Demo](https://codepen.io/xiaoshuang/pen/dJmvPp)
@@ -11,20 +11,10 @@ npm install --save-dev postcss-skin
 
 ## Loader Options
 
-### type
-
-* Type: Oneof `['before-sass', 'after-sass']`
-* Default: `'before-sass'`
-* Required: `true`
-
-before-sass: Add `@mixin skin` to the Scss files.
-
-after-sass: Filter skin css code after Sass-loader, and save in `postcss-skin/lib/temp/temp.js`.
-
 ### prefix
 
 * Type: `String`
-* Default: `'_skin_'`
+* Default: `'$'`
 * Required: `false`
 
 For avoid the conflict of name.
@@ -58,37 +48,37 @@ export default App;
 
 ```scss
 .cus-skin-part {
+  margin: 100px;
   padding: 100px;
-  font-size: 14px;
+  border-radius: 3px;
+  color: '$obj.$attr';
   animation: 1s ani infinite;
+}
 
-  @include skin(&, (
-    box-shadow: '0 0 5px _skin_background',
-    text-shadow: '0 0 5px _skin_array[0]',
-  ));
-
-  @include skin(&) {
-    color: _skin_color;
-    background: _skin_background;
-    border-color: 0 0 5px '_skin_array[1]';
-  };
+@supports (display: block) {
+  @media (max-width: 3000px) {
+    .cus-skin-part {
+      border: 3px solid '$background';
+      text-shadow: 0 5px '$background';
+    }
+  }
 }
 
 @keyframes ani {
   0% {
-    background: _skin_color;
+    background: '$color';
   }
   20% {
-    background: '_skin_array[0]';
-  }
-  40% {
-    background: '_skin_array[1]';
+    background: '$array[0]';
   }
   60% {
-    background: '_skin_obj._skin_attr';
+    background: '$array[1]';
+  }
+  80% {
+    background: '$obj.$attr';
   }
   100% {
-    background: _skin_background;
+    background: '$background';
   }
 }
 ```
@@ -106,19 +96,15 @@ export default App;
           'css-loader?minimize',
           'resolve-url-loader',
           {
-            loader: 'postcss-skin',
+            loader: 'postcss-loader',
             options: {
-              type: 'after-sass',
+              plugins: [
+                require('postcss-skin'),
+              ],
             },
           },
           'sass-loader',
-          {
-            loader: 'postcss-skin',
-            options: {
-              type: 'before-sass',
-            },
-          },
-        ]
+        ],
       },
     ],
   },
