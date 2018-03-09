@@ -1,4 +1,4 @@
-# skin-loader (Base on Sass !!!)
+# postcss-skin (Base on Sass !!!)
 Dynamically create different skin/theme style with data.
 
 [Kind of Demo](https://codepen.io/xiaoshuang/pen/dJmvPp)
@@ -6,7 +6,7 @@ Dynamically create different skin/theme style with data.
 ## Installation
 
 ```sh
-npm install --save-dev skin-loader
+npm install --save-dev postcss-skin
 ```
 
 ## Loader Options
@@ -19,7 +19,7 @@ npm install --save-dev skin-loader
 
 before-sass: Add `@mixin skin` to the Scss files.
 
-after-sass: Filter skin css code after Sass-loader, and save in `skin-loader/lib/temp/temp.js`.
+after-sass: Filter skin css code after Sass-loader, and save in `postcss-skin/lib/temp/temp.js`.
 
 ### prefix
 
@@ -36,7 +36,7 @@ For avoid the conflict of name.
 ```jsx
 import React, { Component } from 'react';
 
-import temp from 'skin-loader/lib/temp';
+import temp from 'postcss-skin/lib/temp';
 
 temp({
   color: 'red',
@@ -106,14 +106,14 @@ export default App;
           'css-loader?minimize',
           'resolve-url-loader',
           {
-            loader: 'skin-loader',
+            loader: 'postcss-skin',
             options: {
               type: 'after-sass',
             },
           },
           'sass-loader',
           {
-            loader: 'skin-loader',
+            loader: 'postcss-skin',
             options: {
               type: 'before-sass',
             },

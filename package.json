@@ -1,5 +1,5 @@
 {
-  "name": "skin-loader",
+  "name": "postcss-skin",
   "version": "1.0.0",
   "description": "Dynamically create different skin/theme style with data",
   "keywords": [
@@ -23,12 +23,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xiaoshuangLi/skin-loader.git"
+    "url": "git+https://github.com/xiaoshuangLi/postcss-skin.git"
   },
   "author": "Xiaoshuang Li",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/xiaoshuangLi/skin-loader/issues"
+    "url": "https://github.com/xiaoshuangLi/postcss-skin/issues"
   },
   "dependencies": {
     "postcss": "^6.0.19"
