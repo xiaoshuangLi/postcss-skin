@@ -37,16 +37,16 @@ export default function(obj = {}, temp = others) {
 
   const cssCharReg = /\s|:|;|,/g;
 
-  // for support ( '_skin_attr' || _skin_attr ) => _skin_attr
+  // for support ( '$attr' || $attr ) => $attr
   const quotationReg = /"|'/g;
-  // for split attr string '_skin_obj._skin_attr' => ['_skin_obj', '_skin_attr'];
+  // for split attr string '$obj.$attr' => ['$obj', '$attr'];
   const splitReg = /\[|\]|\./g; 
 
   // for create attr reg '[0]' => /\[0\]/
-  const splitMatchReg = /(\[|\]|\.)/g;
+  const splitMatchReg = /\W/g;
 
-  // for get `${prefix}${....}` (like: '_skin_color')
-  const keywordReg = new RegExp(`('|"|\\s|:|,)${prefix}\\S(\\s|\\S)*?('|"|\\s|;|,)`, 'g');
+  // for get `${prefix}${....}` (like: '$color')
+  const keywordReg = new RegExp(`('|")[^'"]*${prefix}[^'"]*(?=("|'))("|')`, 'g');
 
   // for clear prefix in code
   const prefixReg = new RegExp(prefix, 'g');

@@ -1,7 +1,14 @@
 {
   "name": "skin-loader",
-  "version": "0.1.14",
+  "version": "1.0.0",
   "description": "Dynamically create different skin/theme style with data",
+  "keywords": [
+    "postcss",
+    "css",
+    "postcss-plugin",
+    "skin",
+    "dynamic"
+  ],
   "main": "lib/index.js",
   "engines": {
     "node": ">=6"
@@ -24,10 +31,7 @@
     "url": "https://github.com/xiaoshuangLi/skin-loader/issues"
   },
   "dependencies": {
-    "loader-utils": "^1.1.0"
-  },
-  "peerDependencies": {
-    "webpack": ">= 3"
+    "postcss": "^6.0.19"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -46,7 +50,6 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "webpack": "^3.8.1"
+    "eslint-plugin-standard": "^3.0.1"
   }
 }

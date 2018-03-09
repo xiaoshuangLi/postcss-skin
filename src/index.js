@@ -1,22 +1,17 @@
-import loaderUtils from 'loader-utils';
 import path from 'path';
 import fs from 'fs';
+import postcss from 'postcss';
 
-import mixin from './mixin';
-import { generateModuleCode, clearObject, getTempsAndCss } from './utils';
+import { generateModuleCode, clearObject } from './utils';
 
 const tempPath = path.resolve(__dirname, './temp/temp.js');
 let temp = require(tempPath);
 
-const defaultOptions = {
-  type: 'before-sass',
-  prefix: '_skin_',
-};
+const saveTemp = (clonedRoot, prefix) => {
+  const path = clonedRoot.source.input.file;
+  const css = clonedRoot.toString();
 
-function saveTemp(temps = [], resourcePath = '', options = {}) {
-  const { prefix = '' } = options;
-
-  temp[resourcePath] = temps.join('');
+  temp[path] = css;
   temp = clearObject(temp);
 
   let res = generateModuleCode(temp);
@@ -25,43 +20,58 @@ function saveTemp(temps = [], resourcePath = '', options = {}) {
   fs.writeSync(fs.openSync(tempPath, 'w'), res);
 }
 
-const funcs = {
-  ['before-sass'](source = '', options = {}) {
-    const { prefix = '' } = options;
-    const mixinCode = mixin(prefix);
+const cleanRoot = (root) => {
+  root.walkAtRules((atRule) => {
+    let shouldRemove = false;
 
-    const res = `${mixinCode}${source}`;
+    atRule.walkDecls(decl => {
+      shouldRemove = true
+    });
+    
+    !shouldRemove && atRule.remove();
+  });
+  
+  root.walkRules((rule) => {
+    !rule.nodes.length && rule.remove();
+  });
 
-    return res;
-  },
-  ['after-sass'](source, options = {}) {
-    const { resourcePath } = this;
-
-    const obj = getTempsAndCss(source, options);
-    const { css, temps = [] } = obj;
-
-    saveTemp(temps, resourcePath, options);
-
-    return css;
-  },
+  return root;
 };
 
-function loader(source) {
-  const options = Object.assign({}, defaultOptions, loaderUtils.getOptions(this));
-  const { type = '', prefix = '' } = options;
-
-  if (!type) {
-    return console.error(`Type is required for skin-loader, please chose in ${Object.keys(funcs).join(',')}`);
-  }
+const skinPlugin = (opts = {}) => {
+  let { prefix = '$' } = opts;
+  prefix = prefix.replace(/\W/g, value => `\\${value}`);
 
   if (!prefix) {
-    console.warn('Prefix is necessary to avoid the conflict of name');
+    console.warn('Prefix is necessary for postcss-skin');
+
+    return noop;
   }
 
-  const func = funcs[type];
-  const res = func.call(this, source, options);
+  const reg = new RegExp(prefix);
 
-  return res;
-}
+  return (root) => {
+    const clonedRoot = root.clone();
 
-export default loader;
+    root.walkDecls(
+      decl => {
+        reg.test(decl.value) && decl.remove();
+      }
+    );
+
+    clonedRoot.walkDecls(
+      decl => {
+        !reg.test(decl.value) && decl.remove();
+      }
+    );
+
+    cleanRoot(root);
+    cleanRoot(clonedRoot);
+
+    saveTemp(clonedRoot, prefix);
+  };
+};
+
+const plugin = postcss.plugin('postcss-skin', skinPlugin);
+
+export default plugin;
