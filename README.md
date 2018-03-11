@@ -1,7 +1,7 @@
 # postcss-skin
 Dynamically create different skin/theme style with data.
 
-[Kind of Demo](https://codepen.io/xiaoshuang/pen/dJmvPp)
+[Kind of Demo](https://codepen.io/xiaoshuang/pen/zWGvZo)
 
 ## For Sass
 [skin-loader](https://github.com/xiaoshuangLi/skin-loader), base on Sass, Webpack
